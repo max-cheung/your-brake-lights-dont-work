@@ -13,7 +13,7 @@ const dbConfig: ConnectionOptions = {
   port: Number(process.env.DB_PORT),
 }
 
-let dbConnection;
+let dbConnection: any;
 
 export async function connectDB() {
   if(!dbConnection) {
