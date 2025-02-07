@@ -1,5 +1,6 @@
 'use server'
 
+import { Connection } from 'mysql2';
 import mysql, { ConnectionOptions } from 'mysql2/promise';
 import { NextResponse } from 'next/server';
 
@@ -12,9 +13,13 @@ const dbConfig: ConnectionOptions = {
   port: Number(process.env.DB_PORT),
 }
 
+let dbConnection;
+
 export async function connectDB() {
-  const dbConnection = await mysql.createConnection(dbConfig);
-  console.log(`Connected to MYSQL Database: ${process.env.DB_NAME}`);
+  if(!dbConnection) {
+    dbConnection = await mysql.createConnection(dbConfig);
+    console.log(`Connected to MYSQL Database: ${process.env.DB_NAME}`);
+  }
   return dbConnection;
 }
 
