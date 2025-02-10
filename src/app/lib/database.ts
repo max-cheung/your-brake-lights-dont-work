@@ -1,9 +1,6 @@
-'use server'
+'use server';
 
-import { Connection } from 'mysql2';
 import mysql, { ConnectionOptions } from 'mysql2/promise';
-import { NextResponse } from 'next/server';
-
 
 const dbConfig: ConnectionOptions = {
   host: process.env.DB_HOST,
@@ -24,6 +21,7 @@ export async function connectDB() {
 }
 
 export async function GET() {
+  // connect to db
   const db = await connectDB();
 
   try {
@@ -37,7 +35,20 @@ export async function GET() {
 }
 
 export async function createPost(formData: FormData) {
-  const license = formData.get('license');
+  // connect to db
+  const db = await connectDB();
 
-  console.log(license);
+  // brakes boolean set to 1 as default for reporting "brakes" as problem
+  const brakes = 1;
+  const license_plate = formData.get('license');
+
+  const sql = 'INSERT INTO vehicles (license_plate, brakes) VALUES (?, ?)';
+
+  console.log(license_plate);
+  try {
+    const result = await db.execute(sql, [license_plate, brakes]);
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
 }

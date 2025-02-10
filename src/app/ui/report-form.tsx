@@ -1,9 +1,6 @@
-import { createPost, GET} from '@/app/lib/database'
+import { createPost } from '@/app/lib/database'
 
 export default function Form() {
-
-  GET();
-
   return (
     <form action={createPost} className="font-[family-name:var(--font-geist-mono)]">
       <label>Report</label>
