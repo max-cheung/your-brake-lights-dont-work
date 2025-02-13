@@ -79,8 +79,16 @@ export async function reportLicense(prevState: State, formData: FormData) {
   try {
     const rows = await db.execute(sql, [license_plate, brakes]);
     console.log(rows);
-    return JSON.parse(JSON.stringify(rows)); 
+    // return JSON.parse(JSON.stringify(rows)); 
+    return {
+      errors: {},
+      message: "success"
+    }
   } catch (error) {
     console.error(error);
+    return {
+      // errors: {},
+      message: 'failed'
+    }
   }
 }
