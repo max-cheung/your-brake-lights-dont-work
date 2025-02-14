@@ -26,14 +26,14 @@ export default function Form() {
           name="license"
           placeholder="License #"
           className="border-2"
-          pattern="^(?!\s)(?!.*\s$)[a-zA-Z0-9 ]{1,7}$"
+          // pattern="^(?!\s)(?!.*\s$)[a-zA-Z0-9 ]{1,7}$"
           required
           title="Input a valid license plate."
         />
         <button type="submit">Submit</button>
       </form>
       <div>
-        {!state.errors && <p>{state.message}</p>}
+        {!state.errors && state.message==="Database: Post Request Successful!" && <p className="mt-2 font-[family-name:var(--font-geist-mono)]">Thank you for helping make the roads safer!</p>}
       </div>
       <div className="font-[family-name:var(--font-geist-mono) mt-2 text-red-600">
         {state.errors?.license_plate && <p>{state.errors.license_plate}</p>}

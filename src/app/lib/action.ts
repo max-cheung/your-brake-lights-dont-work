@@ -56,15 +56,11 @@ export async function reportLicense(prevState: State, formData: FormData) {
   const sql = 'INSERT INTO vehicles (license_plate, brakes) VALUES (?, ?)';
 
   try {
-    const rows = await db.execute(sql, [license_plate, brakes]);
-    console.log(rows);
-    return {
-      message: "success"
-    }
+    const [result] = await db.execute(sql, [license_plate, brakes]);
+    console.log(result);
+    return { message: "Database: Post Request Successful!" }
   } catch (error) {
     console.error(error);
-    return {
-      message: 'failed'
-    }
+    return { message: "Database Error: Post Request Failed!" }
   }
 }
