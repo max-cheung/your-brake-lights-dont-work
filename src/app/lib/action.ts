@@ -20,7 +20,7 @@ export async function GET() {
 // Report License POST
 
 const FormSchema = z.object({
-  license_plate: z.string().regex(/^[a-zA-Z0-9]{1,7}$/, {
+  license_plate: z.string().regex(/^(?!\s)(?!.*\s$)[a-zA-Z0-9 ]{1,7}$/, {
     message: "Please enter a valid license plate #."
   })
 });

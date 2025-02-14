@@ -15,7 +15,7 @@ export default function Form() {
   return (
     <form action={formAction} className="font-[family-name:var(--font-geist-mono)]">
       <label>Report</label>
-      <input type="text" id="license" name="license" placeholder="License #" className="text-black" />
+      <input type="text" id="license" name="license" placeholder="License #" className="text-black" pattern='^(?!\s)(?!.*\s$)[a-zA-Z0-9 ]{1,7}$' required title="Input a valid license plate."/>
       <button type="submit">Submit</button>
     </form>
   );
