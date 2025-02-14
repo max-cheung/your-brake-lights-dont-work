@@ -1,15 +1,16 @@
 'use client'
 
-import { reportLicense, State } from '@/app/lib/database'
-import { useActionState } from 'react';
+import { reportLicense, State } from '@/app/lib/action'
+import { useActionState, useEffect } from 'react';
 
 export default function Form() {
-  const initialState: State = { message: null, errors: {} };
+  const initialState: State = { errors: {}, message: null };
 
   const [state, formAction] = useActionState(reportLicense, initialState);
 
-  console.log(state);
-  console.log("hello world");
+  useEffect(() => {
+    console.log(JSON.stringify(state));
+  }, [state]);
 
   return (
     <form action={formAction} className="font-[family-name:var(--font-geist-mono)]">
