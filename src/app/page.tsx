@@ -1,4 +1,5 @@
-import Form from "@/app/ui/report-form";
+import ReportForm from "@/app/ui/report-form";
+import SearchForm from "./ui/search-form";
 // font-[family-name:var(--font-geist-mono)]
 export default function Page() {
   return (
@@ -6,7 +7,8 @@ export default function Page() {
       <h1 className="font-[family-name:var(--font-geist-mono)] mb-2">
         Your Brake Lights Don't Work.
       </h1>
-      <Form />
+      <ReportForm />
+      <SearchForm />
     </main>
   );
 }
