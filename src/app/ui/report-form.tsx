@@ -7,7 +7,6 @@ export default function Form() {
   const initialState: State = { errors: {}, message: null };
 
   const [state, formAction] = useActionState(reportLicense, initialState);
-  const str: string = 'hello world'
 
   useEffect(() => {
     console.log(JSON.stringify(state));
@@ -22,8 +21,8 @@ export default function Form() {
         <label hidden>Report</label>
         <input
           type="text"
-          id="license"
-          name="license"
+          id="reportLicense"
+          name="reportLicense"
           placeholder="Report License #"
           className="border-2 pl-2 rounded-md"
           // pattern="^(?!\s)(?!.*\s$)[a-zA-Z0-9 ]{1,7}$"

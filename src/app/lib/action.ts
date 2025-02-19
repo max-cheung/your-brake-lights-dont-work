@@ -39,7 +39,7 @@ export async function reportLicense(prevState: State, formData: FormData) {
   const db = await connectDB();
 
   const validatedFields = ReportLicense.safeParse({
-    license_plate: formData.get('license')
+    license_plate: formData.get('reportLicense')
   });
 
   if(!validatedFields.success) {
@@ -63,4 +63,8 @@ export async function reportLicense(prevState: State, formData: FormData) {
     console.error(error);
     return { message: "Database Error: Post Request Failed!" }
   }
+}
+
+export async function checkLicense(prevState: State, formData: FormData) {
+  console.log(formData.get('checkLicense'));
 }
