@@ -25,7 +25,7 @@ const FormSchema = z.object({
   })
 });
 
-const ReportLicense = FormSchema;
+const LicenseSchema = FormSchema;
 
 export type State = {
   errors?: {
@@ -38,7 +38,7 @@ export async function reportLicense(prevState: State, formData: FormData) {
   // connect to db
   const db = await connectDB();
 
-  const validatedFields = ReportLicense.safeParse({
+  const validatedFields = LicenseSchema.safeParse({
     license_plate: formData.get('reportLicense')
   });
 
@@ -66,5 +66,31 @@ export async function reportLicense(prevState: State, formData: FormData) {
 }
 
 export async function checkLicense(prevState: State, formData: FormData) {
-  console.log(formData.get('checkLicense'));
+  // connect to db
+  const db = await connectDB();
+
+  const validatedFields = LicenseSchema.safeParse({
+    license_plate: formData.get('checkLicense')
+  });
+
+  if(!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      message: "Invalid Fields. Failed to Check License"
+    };
+  }
+
+  const { license_plate } = validatedFields.data;
+
+  const sql = 'SELECT * FROM vehicles WHERE license_plate = ?';
+
+  try {
+    const [rows] = await db.execute(sql, [license_plate]);
+    console.log(rows);
+    return { message: "Database: Get Request Successful!"}
+  } catch (error) {
+    console.error(error);
+    return { message: "Database Error: Get Request Failed!"}
+  }
+
 }
